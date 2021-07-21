@@ -1,0 +1,11 @@
+---
+version: "1"
+name: blogs
+language: go
+scripts:
+  - bash .sh/build.sh
+artifacts:
+  image:
+    - harbor.hub.com/blogs
+  version:
+    v1.21.2
