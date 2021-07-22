@@ -52,11 +52,10 @@ def certificate_information(f_path=os.path.join(__BASE_DIR, "ca.pem"), z="+0800"
     cert_info["extension_count"] = cert.get_extension_count()
     cert_info["start_timestamp"] = get_timestamp(cert.get_notBefore().decode("UTF-8"), z)
     cert_info["expire_timestamp"] = get_timestamp(cert.get_notAfter().decode("UTF-8"), z)
-    c_list = list()
+    c_dict = dict()
     for item in  cert_info["components"]:
-        component = {item[0].decode("utf-8"): item[1].decode("utf-8")}
-        c_list.append(component)
-    cert_info["components"] = c_list
+        c_dict[item[0].decode("utf-8")] = item[1].decode("utf-8")
+    cert_info["components"] = c_dict
     return cert_info
 
 def signed_certificate():
@@ -64,7 +63,9 @@ def signed_certificate():
     cert_info["ca"] = dict()
     cert_info["ca"]["serial_number"] = "0x292825060443b581fe5e105be7c306a4cxxx0bf3"
     cert_info["credential_info"] = certificate_information()
-    cert_info["credential"] = open(os.path.join(__BASE_DIR, "cert_base64")).read()
+    cert_info["cert"] = dict()
+    cert_info["cert"]["certificate_data"] = open(os.path.join(__BASE_DIR, "cert_base64")).read()
+    cert_info["cert"]["key_data"] = open(os.path.join(__BASE_DIR, "cert_base64")).read()
     return cert_info
 
 # 配置时区，需要和运行环境的时区保持一致
