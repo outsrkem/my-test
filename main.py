@@ -1,6 +1,5 @@
 # -*- coding=utf-8 -*-
 import os
-
 from app_fiask import init_app
 from router import reg_blueprint
 

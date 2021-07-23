@@ -1,10 +1,9 @@
 from flask import Flask
 
 __app = Flask(__name__)
+
+
 def init_app():
-    @__app.route("/", methods=['GET', 'HEAD'])
-    def index():
-        return {"status": {"code": 200, "msg": "successful"}}
     return __app
 
 

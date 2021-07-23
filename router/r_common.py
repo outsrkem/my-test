@@ -18,13 +18,11 @@ def analysis_yaml():
     return x
 
 
-@common.route("/", methods=['GET', 'HEAD'])
-def index():
-    res = {"status": {"code": 200, "msg": "successful"}}
-    return jsonify(res)
-
-
 @common.route("/yaml")
 def hello_world():
+    """
+    /api/v1/common/yaml
+    :return:
+    """
     response = analysis_yaml()
     return jsonify(response)
