@@ -9,7 +9,7 @@ __app = Flask(__name__)
 @__app.errorhandler(404)
 def page_not_found(e):
     request_time = int(round(time.time() * 1000))
-    msg = f"The requested URL {request.path} was not found on this server."
+    msg = f"{str(e)} URL: {request.path} "
     return {"meta_info": {"code": 404, "msg": msg, "request_time": request_time}}, 404
 
 
