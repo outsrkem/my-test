@@ -30,7 +30,7 @@ def get_timestamp(t, z):
     :return: 时间戳 1551660660000  <class 'int'>
     """
     t_time = datetime.strptime(t, "%Y%m%d%H%M%SZ") + timedelta(hours=zone_offset(z))
-    return int(time.mktime(t_time.timetuple()))*1000
+    return int(time.mktime(t_time.timetuple())) * 1000
 
 
 def certificate_information(f_path=os.path.join(__BASE_DIR, "ca.pem"), z="+0800"):
@@ -53,10 +53,11 @@ def certificate_information(f_path=os.path.join(__BASE_DIR, "ca.pem"), z="+0800"
     cert_info["start_timestamp"] = get_timestamp(cert.get_notBefore().decode("UTF-8"), z)
     cert_info["expire_timestamp"] = get_timestamp(cert.get_notAfter().decode("UTF-8"), z)
     c_dict = dict()
-    for item in  cert_info["components"]:
+    for item in cert_info["components"]:
         c_dict[item[0].decode("utf-8")] = item[1].decode("utf-8")
     cert_info["components"] = c_dict
     return cert_info
+
 
 def signed_certificate():
     cert_info = dict()
@@ -68,6 +69,7 @@ def signed_certificate():
     cert_info["cert"]["key_data"] = open(os.path.join(__BASE_DIR, "cert_base64")).read()
     return cert_info
 
+
 # 配置时区，需要和运行环境的时区保持一致
 
 if __name__ == '__main__':
@@ -77,5 +79,3 @@ if __name__ == '__main__':
     print(ca_info)
     aa = signed_certificate()
     print(aa)
-
-

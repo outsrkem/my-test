@@ -1,4 +1,5 @@
 import os
+
 '''
 在项目目录里执行命令启动应用
 gunicorn -c gunicorn_config.py main:app
@@ -22,20 +23,19 @@ timeout = 120
 reload = True
 
 # 设置守护进程
-#daemon = True
+# daemon = True
 
-#进程数
+# 进程数
 workers = 1
 
-#gunicorn要切换到的目的工作目录
+# gunicorn要切换到的目的工作目录
 chdir = BASE_DIR
 # pid文件
 pidfile = os.path.join(RUN_DIR, "app.pid")
-#日志级别，这个日志级别指的是错误日志的级别，而访问日志的级别无法设置
+# 日志级别，这个日志级别指的是错误日志的级别，而访问日志的级别无法设置
 loglevel = 'debug'
 access_log_format = '%(t)s %(p)s %(h)s "%(r)s" %(s)s %(L)s %(b)s %(f)s" "%(a)s"'
 
 # 日志
 accesslog = os.path.join(LOG_DIR, "access.log")
 errorlog = os.path.join(LOG_DIR, "error.log")
-
