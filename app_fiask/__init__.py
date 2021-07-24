@@ -1,9 +1,21 @@
 # -*- coding=utf-8 -*-
 from urllib import request
 from flask import Flask, request
+from flask_sqlalchemy import SQLAlchemy
+from settings import DB_HOST, DB_PORT, DB_NAME, DB_USER_NAME, DB_PASSWD
+from settings import SQLALCHEMY_POOL_SIZE, SQLALCHEMY_POOL_RECYCLE, \
+    SQLALCHEMY_TRACK_MODIFICATIONS, SQLALCHEMY_ECHO, SQLALCHEMY_MAX_OVERFLOW
 import time
 
 __app = Flask(__name__)
+__app.config['SQLALCHEMY_DATABASE_URI'] = \
+    f'mysql+pymysql://{DB_USER_NAME}:{DB_PASSWD}@{DB_HOST}:{DB_PORT}/{DB_NAME}?charset=utf8'
+__app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = SQLALCHEMY_TRACK_MODIFICATIONS
+__app.config['SQLALCHEMY_POOL_SIZE'] = SQLALCHEMY_POOL_SIZE
+__app.config['SQLALCHEMY_POOL_RECYCLE'] = SQLALCHEMY_POOL_RECYCLE
+__app.config['SQLALCHEMY_ECHO'] = SQLALCHEMY_ECHO
+__app.config['SQLALCHEMY_MAX_OVERFLOW'] = SQLALCHEMY_MAX_OVERFLOW
+db = SQLAlchemy(__app)
 
 
 @__app.errorhandler(404)
